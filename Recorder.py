@@ -13,6 +13,7 @@ class Recorder():
         self.__running =True
         self.__looping =False
         self.__FRAMES=[]
+        self.i=0
 
     def start(self):
         print("recording")

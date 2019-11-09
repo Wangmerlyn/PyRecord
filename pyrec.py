@@ -16,11 +16,7 @@ def writetofile(key):
     if keydata=="Key.enter":
         Listener.stop()
     elif Mode.getNoneMode():
-        if keydata=="'r'":
-            Mode.setRecordMode() #进入录音模式
-        elif keydata=="'w'":
-            Mode.setPlayMode()
-            pass
+        Mode.ChooseMode(keydata) #选择模式
     elif Mode.getRecordMode():  #如果处于录音模式
         if not Mode.getRecording():
             if keydata=="Key.esc":
@@ -50,6 +46,20 @@ def writetofile(key):
                 Mode.setLoopMode()
             else:
                 Mode.KeyToTrack[keydata].play()
+    elif Mode.getFXMode():
+        if keydata=="Key.esc":
+            Mode.setNoneMode()
+        elif Mode.ChoosingTrackMode:
+            Mode.ChosenTrack=Mode.KeyToTrack[keydata]
+            Mode.ChoosingTrackMode=False
+            Mode.ShowFX()
+        elif Mode.ChoosingFXMode:
+            Mode.ChooseFX(keydata)
+            Mode.ChoosingFXMode=False
+        else:
+            Mode.KeyToTrack[keydata]=Mode.ChosenTrack
+            Mode.ChoosingTrackMode=True
+        
     with open("log.txt",'a') as f:
         f.write(str(time.clock())+":"+keydata+'\n')
 

@@ -6,7 +6,11 @@ class RecordMode:
         self.__PlayMode=False
         self.__NoneMode=True
         self.__LoopMode=False
+        self.__FXMode=False
         self.KeyToTrack={}
+        self.ChoosingTrackMode=True
+        self.ChoosingFXMode=False
+        self.ChosenTrack=None
 
     def getRecording(self):
         return self.__Recording
@@ -26,6 +30,7 @@ class RecordMode:
         self.__PlayMode=False
         self.__RecordMode=False
         self.__LoopMode=False
+        self.__FXMode=False
 
     def setRecordMode(self):
         print("Recording mode ON\n")
@@ -60,8 +65,26 @@ class RecordMode:
     def getLoopMode(self):
         return self.__LoopMode
     
+    def setFXMode(self):
+        print("FX Mode On\n")
+        self.__NoneAllMode()
+        self.__FXMode=True
+    
+    def getFXMode(self):
+        return self.__FXMode
+    
     def setKeySet(self,keydata,track):
         self.KeyToTrack[keydata]=track
-
+    
+    def ChooseMode(self,keydata):
+        if keydata=="'r'":
+            self.setRecordMode() #进入录音模式
+        elif keydata=="'w'":
+            self.setPlayMode()
+        elif keydata=="'e'":
+            self.setFXMode()
+    
+        
+    
 if __name__=="__main__":
     print("This is RecordControl module")
