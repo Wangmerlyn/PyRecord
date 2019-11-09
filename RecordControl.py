@@ -5,6 +5,7 @@ class RecordMode:
         self.__RecordMode=False
         self.__PlayMode=False
         self.__NoneMode=True
+        self.__LoopMode=False
         self.KeyToTrack={}
 
     def getRecording(self):
@@ -24,6 +25,7 @@ class RecordMode:
         self.__NoneMode=False
         self.__PlayMode=False
         self.__RecordMode=False
+        self.__LoopMode=False
 
     def setRecordMode(self):
         print("Recording mode ON\n")
@@ -48,7 +50,16 @@ class RecordMode:
 
     def getNoneMode(self):
         return self.__NoneMode
-
+    
+    def setLoopMode(self):
+        print("Loop Mode On\n")
+        self.__NoneAllMode()
+        self.__PlayMode=True
+        self.__LoopMode=True
+    
+    def getLoopMode(self):
+        return self.__LoopMode
+    
     def setKeySet(self,keydata,track):
         self.KeyToTrack[keydata]=track
 

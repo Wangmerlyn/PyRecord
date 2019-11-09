@@ -38,18 +38,27 @@ def writetofile(key):
     elif Mode.getPlayMode():    #如果处于播放模式
         if keydata=="Key.esc":
             Mode.setNoneMode()
-        else:
-            Mode.KeyToTrack[keydata].play()
+        elif Mode.getLoopMode():
+            if keydata=="'q'":
+                Mode.setPlayMode()
+            elif Mode.KeyToTrack[keydata].getLooping():
+                Mode.KeyToTrack[keydata].stoploop()
+            else :
+                Mode.KeyToTrack[keydata].loop()
+        else :
+            if keydata=="'q'":
+                Mode.setLoopMode()
+            else:
+                Mode.KeyToTrack[keydata].play()
     with open("log.txt",'a') as f:
         f.write(str(time.clock())+":"+keydata+'\n')
 
 
 if __name__=="__main__":
-    plt.close('ajd')
+    plt.close('')
     print (sd.query_devices())
     with Listener(on_press=writetofile) as Listener:
         print('a')
         Mode=rc.RecordMode()
         Listener.join()
     print("End")
-        

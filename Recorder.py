@@ -11,6 +11,7 @@ class Recorder():
         self.RATE=rate
         self.__name=Name
         self.__running =True
+        self.__looping =False
         self.__FRAMES=[]
 
     def start(self):
@@ -18,11 +19,11 @@ class Recorder():
         threading._start_new_thread(self.__recording,())
 
     def __recording(self):
-        self._running=True
+        self.__running=True
         self._FRAMES=[]
         p=pyaudio.PyAudio()
         stream=p.open(format=self.FORMAT,channels=self.CHANNELS,rate=self.RATE,input=True,frames_per_buffer=self.CHUNK)
-        while(self._running):
+        while(self.__running):
             data=stream.read(self.CHUNK)
             self._FRAMES.append(data)
         stream.stop_stream()
@@ -33,7 +34,7 @@ class Recorder():
 
     def stop(self):
         print("stop")
-        self._running=False
+        self.__running=False
     
     def save(self):
         p =pyaudio.PyAudio()
@@ -48,7 +49,7 @@ class Recorder():
         print("saved "+self.__name)
     
     def isRecording(self):
-        return self._running
+        return self.__running
     
     def __play(self):
         print("Start Playing "+self.__name)
@@ -66,7 +67,33 @@ class Recorder():
 
     def play(self):
         threading._start_new_thread(self.__play,())
+    
+    def __loop(self):
+        print("Start Looping "+self.__name)
+        p =pyaudio.PyAudio()
+        stream=p.open(format=self.FORMAT,channels=self.CHANNELS,rate=self.RATE,output=True)
+        wf=wave.open(self.__name,'rb')
+        data=wf.readframes(self.CHUNK)
+        while self.__looping:
+            stream.write(data)
+            data=wf.readframes(self.CHUNK)
+            if data==b'':
+                wf=wave.open(self.__name,'rb')
+                data=wf.readframes(self.CHUNK)
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        print("Complete Looping "+self.__name)
+    
+    def loop(self):
+        self.__looping=True
+        threading._start_new_thread(self.__loop,())
 
+    def stoploop(self):
+        self.__looping=False
+    
+    def getLooping(self):
+        return self.__looping
         
 
 
