@@ -1,3 +1,4 @@
+import TrackFX
 class RecordMode:
     def __init__(self):
         self.__Recording=False
@@ -11,6 +12,7 @@ class RecordMode:
         self.ChoosingTrackMode=True
         self.ChoosingFXMode=False
         self.ChosenTrack=None
+        self.track=TrackFX.TrackFX()
 
     def getRecording(self):
         return self.__Recording
@@ -26,7 +28,7 @@ class RecordMode:
         return None
 
     def __NoneAllMode(self):
-        self.__NoneMode=False
+        #self.__NoneMode=False
         self.__PlayMode=False
         self.__RecordMode=False
         self.__LoopMode=False
@@ -84,6 +86,13 @@ class RecordMode:
         elif keydata=="'e'":
             self.setFXMode()
     
+    def ShowFX(self):
+        self.track.ShowList()
+        pass
+    
+    def ChooseFX(self,keydata):
+        self.track.Choose(keydata,self.ChosenTrack)
+        pass
         
     
 if __name__=="__main__":
