@@ -3,8 +3,8 @@ class RecordMode:
         self.__Recording=False
         self.__Playing=False
         self.__RecordMode=False
-        self.__PlayMode=False
-        self.__NoneMode=True
+        self.__PlayMode=True
+        #self.__NoneMode=True
         self.__LoopMode=False
         self.__FXMode=False
         self.KeyToTrack={}
@@ -48,13 +48,13 @@ class RecordMode:
     def getPlayMode(self):
         return self.__PlayMode
     
-    def setNoneMode(self):
-        print("None Mode ON\n")
-        self.__NoneAllMode()
-        self.__NoneMode=True
+    #def setNoneMode(self):
+    #    print("None Mode ON\n")
+    #    self.__NoneAllMode()
+    #    self.__NoneMode=True
 
-    def getNoneMode(self):
-        return self.__NoneMode
+   # def getNoneMode(self):
+   #     return self.__NoneMode
     
     def setLoopMode(self):
         print("Loop Mode On\n")
