@@ -21,15 +21,16 @@ class Recorder():
 
     def __recording(self):
         self.__running=True
-        self._FRAMES=[]
+        self.__FRAMES=[]
         p=pyaudio.PyAudio()
         stream=p.open(format=self.FORMAT,channels=self.CHANNELS,rate=self.RATE,input=True,frames_per_buffer=self.CHUNK)
         while(self.__running):
             data=stream.read(self.CHUNK)
-            self._FRAMES.append(data)
+            self.__FRAMES.append(data)
         stream.stop_stream()
         stream.close
         p.terminate
+        self.save(self.__FRAMES)    #在结束之后保存
     
         
 
@@ -37,7 +38,7 @@ class Recorder():
         print("stop")
         self.__running=False
     
-    def save(self):
+    def save(self,Frame):
         p =pyaudio.PyAudio()
         if not self.__name.endswith(".wav"):
             self.__name+=".wav"
@@ -45,7 +46,7 @@ class Recorder():
         wf.setnchannels(self.CHANNELS)
         wf.setsampwidth(p.get_sample_size(self.FORMAT))
         wf.setframerate(self.RATE)
-        wf.writeframes(b''.join(self._FRAMES))
+        wf.writeframes(b''.join(Frame))
         wf.close()
         print("saved "+self.__name)
     
@@ -95,6 +96,9 @@ class Recorder():
     
     def getLooping(self):
         return self.__looping
+
+    def getName(self):
+        return self.__name
         
 
 

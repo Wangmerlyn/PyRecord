@@ -11,7 +11,9 @@ class RecordMode:
         self.KeyToTrack={}
         self.ChoosingTrackMode=True
         self.ChoosingFXMode=False
+        self.ChoosingKeyMode=False
         self.ChosenTrack=None
+        self.NewTrack=None
         self.track=TrackFX.TrackFX()
 
     def getRecording(self):
@@ -88,11 +90,9 @@ class RecordMode:
     
     def ShowFX(self):
         self.track.ShowList()
-        pass
     
-    def ChooseFX(self,keydata):
-        self.track.Choose(keydata,self.ChosenTrack)
-        pass
+    def ChooseFX(self,keydata): #选择效果
+        self.track.Choose(keydata,self.ChosenTrack,self.NewTrack)
         
     
 if __name__=="__main__":

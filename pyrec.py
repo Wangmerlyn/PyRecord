@@ -30,7 +30,7 @@ def writetofile(key):
             print("Recording mode On\nrecording stopped")
             Mode.setRecording(False)
             Mode.KeyToTrack[keydata].stop()
-            Mode.KeyToTrack[keydata].save()
+            #Mode.KeyToTrack[keydata].save()
             Mode.setPlayMode()  #退出录音模式
     elif Mode.getPlayMode():    #如果处于播放模式
         if keydata=="'r'":
@@ -50,21 +50,29 @@ def writetofile(key):
             else:
                 Mode.KeyToTrack[keydata].play()
     elif Mode.getFXMode():
-        if keydata=="'q'":
-            Mode.setPlayMode()
-        elif Mode.ChoosingTrackMode:
-            Mode.ChosenTrack=Mode.KeyToTrack[keydata]
+        if Mode.ChoosingTrackMode:
+            if keydata=="'q'":
+                Mode.setPlayMode()
+            Mode.ChosenTrack=Mode.KeyToTrack[keydata]    #传入文件名
             Mode.ChoosingTrackMode=False
+            Mode.ChoosingKeyMode=True
+            print("Choose A Key For The New Track\n")
+        elif Mode.ChoosingKeyMode:
+            Mode.NewTrack=recorder.Recorder(keydata)
+            Mode.ChoosingKeyMode=False
+            Mode.ChoosingFXMode=True
             Mode.ShowFX()
+            print("Choose Your Effect\n")
         elif Mode.ChoosingFXMode:
             Mode.ChooseFX(keydata)
+            print(Mode.NewTrack.getName()[0:-4])
+            Mode.KeyToTrack[Mode.NewTrack.getName()[0:-4]]=Mode.NewTrack
             Mode.ChoosingFXMode=False
-        else:
-            Mode.KeyToTrack[keydata]=Mode.ChosenTrack
             Mode.ChoosingTrackMode=True
+            Mode.setPlayMode()
         
-    with open("log.txt",'a') as f:
-        f.write(str(time.clock())+":"+keydata+'\n')
+    #with open("log.txt",'a') as f:
+    #    f.write(str(time.clock())+":"+keydata+'\n')
 
 
 if __name__=="__main__":
