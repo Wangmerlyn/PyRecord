@@ -25,17 +25,21 @@ class TrackFX:
         wf_track=wave.open(track.getName(),'rb')
         i=0
         print("input a rate\n")
+        j=2
+        #j=int(input())
+        #print(j)
+        #print(type(j))
         #input(i)
         frames=[]
         data=wf_track.readframes(track.CHUNK)
         while data!=b'' :
-            if i%2==0:
+            if i%j==0:
                 data=wf_track.readframes(track.CHUNK)
                 i%=2
                 i+=1
             else :
                 wf_track.readframes(track.CHUNK)
-                i%=2
+                i%=j
                 i+=1
             frames.append(data)
         #new_track.RATE*=2

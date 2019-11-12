@@ -1,23 +1,32 @@
 # Python Sampler
 ## Made By WangMerlyn
 ### How To Use
-#### None Mode
-press 'R' to enter ***Record Mode***\
-press 'W' to enter ***Play Mode***\
-press 'ESC' to exit to ***None Mode***\
-press 'ENTER' to quit
-#### Record Mode
-press the **key** that is not used to start recording your track\
-press the **key** again to stop recording and save the track\
-press the **key** that has already been recorded a key to record new track 
-#### Play Mode
-press the **key** that has been recorded a key to play it once\
+This terminal application has 4 modes:
+* ***Record Mode***\
+Press 'R' to enter ***Record Mode***\
+After recording a Track, the app automatically switch to ***Play Mode***
+* ***Play Mode***\
+This App Starts in Play Mode
+Press 'W' to enter ***Play Mode***
+* ***Loop Mode***\
+Press 'Q' to enter ***Loop Mode*** \
+While you are in ***Play Mode***
+* ***FX Mode***\
+Press 'W' to enter ***FX Mode***
+After giving the Track a FX, the app automatically switch to ***Play Mode***
+### Record Mode
+Press the **key** that is not used to start recording your track\
+Press the **key** again to stop recording and save the track\
+Press the **key** that has already been recorded a key to record new track 
+### Play Mode
+Press the **key** that has been recorded a key to play it once\
 (**Warning**:press the key that has not been record a track will trigger a bug and cause **corruption**)\
-while in ***Play Mode*** press 'Q' to enter ***Loop Mode***
-#### Loop Mode
-press the ***key*** to your set ***track*** to loop the track\
-press the ***key*** again to stop looping of the set ***track***\
-press 'Q' to quit ***Loop Mode***\
-press 'ESC' to enter ***None Mode***
-### TODO
-effects
+While in ***Play Mode*** press 'Q' to enter ***Loop Mode***
+### Loop Mode
+Press the ***key*** to your set ***track*** to loop the track\
+Press the ***key*** again to stop looping of the set ***track***\
+Press 'Q' to quit ***Loop Mode***
+### FX Mode
+After entering the ***FX Mode***, press the key of the Track that you want to give FX to\
+Press the Key of the Track you want to set on\
+Choose the FXes from the FX list
