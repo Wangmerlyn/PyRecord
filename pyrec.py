@@ -13,15 +13,17 @@ import Recorder as recorder #录音器
 def writetofile(key):
     keydata =str(key)
     print(keydata)
-    if keydata=="Key.enter":
+    if keydata=="Key.esc":
         Listener.stop()
     #elif Mode.getNoneMode():
         #Mode.ChooseMode(keydata) #选择模式
+    if Mode.ChooseMode(keydata):
+        return
     elif Mode.getRecordMode():  #如果处于录音模式
         if not Mode.getRecording():
-            if keydata=="'q'":
-                Mode.setPlayMode()
-            else:
+            #if keydata=="'q'":
+                #Mode.setPlayMode()
+            #else:
                 Mode.setRecording(True)
                 a=recorder.Recorder(keydata)
                 Mode.setKeySet(keydata,a) #没有开始录音
@@ -33,21 +35,25 @@ def writetofile(key):
             #Mode.KeyToTrack[keydata].save()
             Mode.setPlayMode()  #退出录音模式
     elif Mode.getPlayMode():    #如果处于播放模式
-        if keydata=="'r'":
-            Mode.setRecordMode()
-        elif keydata=="'e'":
-            Mode.setFXMode()
-        elif Mode.getLoopMode():
-            if keydata=="'q'":
-                Mode.setPlayMode()
-            elif Mode.KeyToTrack[keydata].getLooping():
-                Mode.KeyToTrack[keydata].stoploop()
-            else :
-                Mode.KeyToTrack[keydata].loop()
-        else :
-            if keydata=="'q'":
-                Mode.setLoopMode()
+        #if keydata=="'r'":
+            #Mode.setRecordMode()
+        #elif keydata=="'e'":
+            #Mode.setFXMode()
+        if Mode.getLoopMode():
+            #if keydata=="'q'":
+                #Mode.setPlayMode()
+            if keydata in Mode.KeyToTrack:
+                if Mode.KeyToTrack[keydata].getLooping():
+                    Mode.KeyToTrack[keydata].stoploop()
+                else :
+                    Mode.KeyToTrack[keydata]. loop()
             else:
+                return 
+        else :
+            #if keydata=="'q'":
+                #Mode.setLoopMode()
+            #else:
+            if keydata in Mode.KeyToTrack:
                 Mode.KeyToTrack[keydata].play()
     elif Mode.getFXMode():
         if Mode.ChoosingTrackMode:

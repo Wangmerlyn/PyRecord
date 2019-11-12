@@ -82,11 +82,25 @@ class RecordMode:
     
     def ChooseMode(self,keydata):
         if keydata=="'r'":
-            self.setRecordMode() #进入录音模式
-        elif keydata=="'w'":
-            self.setPlayMode()
+            if self.getRecordMode():
+                self.setPlayMode() #进入录音模式
+            else:
+                self.setRecordMode()
+            return True
+        elif keydata=="'q'":
+            if self.getLoopMode():
+                self.setPlayMode()
+            else:
+                self.setLoopMode()
+            return True
         elif keydata=="'e'":
-            self.setFXMode()
+            if self.getFXMode():
+                self.setPlayMode()
+            else:
+                self.getFXMode()
+            return True
+        else:
+            return False
     
     def ShowFX(self):
         self.track.ShowList()
