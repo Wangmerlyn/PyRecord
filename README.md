@@ -27,6 +27,6 @@ Press the ***key*** to your set ***track*** to loop the track\
 Press the ***key*** again to stop looping of the set ***track***\
 Press 'Q' to quit ***Loop Mode***
 ### FX Mode
-After entering the ***FX Mode***, press the key of the Track that you want to give FX to\
+After entering the ***FX Mode***, choose the FXes from the FX list
+Press the key of the Track that you want to give FX to\
 Press the Key of the Track you want to set on\
-Choose the FXes from the FX list

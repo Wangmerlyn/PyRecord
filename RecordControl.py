@@ -91,6 +91,8 @@ class RecordMode:
                 self.ShowFX()
                 print("Choose Your FXes")
             return True
+        elif keydata=="Key.enter":
+            return True
         else:
             return False
     
@@ -99,7 +101,6 @@ class RecordMode:
 
     
     def ChooseFX(self,keydata): #选择效果
-        #self.track.ChooseFX(keydata,self.ChosenTrack,self.NewTrack)
         return self.track.ChooseFX(keydata)
     
     def giveFXtoTrack(self,ChosenTrack,NewTrack):

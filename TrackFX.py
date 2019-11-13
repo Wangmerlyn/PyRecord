@@ -1,7 +1,5 @@
 import Recorder
 import wave
-import threading
-import pyaudio
 class TrackFX:
     def __init__(self):
         self.__ChosenFX=None
@@ -14,8 +12,7 @@ class TrackFX:
     def ShowList(self):
         print(self.__FXList)
     def ChooseFX(self,Keydata):
-        #self.__ChosenFX=Keydata
-        return self.__FXDic[Keydata]
+        return self.__FXDic[Keydata]    #返回FX的对象
 
     def Choose(self,keydata,track,ChosenTrack):
         self.__FXDic[keydata](track,ChosenTrack)
@@ -32,7 +29,7 @@ class AllFast:
         wf_track=wave.open(track[0].getName(),'rb')
         i=0
         print("input a rate\n")
-        j=2
+        j=int(input())
         frames=[]
         data=wf_track.readframes(track[0].CHUNK)
         while data!=b'' :
@@ -45,7 +42,6 @@ class AllFast:
                 i%=j
                 i+=1
             frames.append(data)
-        #new_track.RATE*=2
         new_track.save(frames)
         
     def getNumber(self):

@@ -34,7 +34,7 @@ def writetofile(key):
                 if Mode.KeyToTrack[keydata].getLooping():
                     Mode.KeyToTrack[keydata].stoploop()
                 else :
-                    Mode.KeyToTrack[keydata]. loop()
+                    Mode.KeyToTrack[keydata].loop()
             else:
                 return 
         else :
