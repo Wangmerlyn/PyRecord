@@ -5,14 +5,14 @@ class RecordMode:
         self.__Playing=False
         self.__RecordMode=False
         self.__PlayMode=True
-        #self.__NoneMode=True
         self.__LoopMode=False
         self.__FXMode=False
         self.KeyToTrack={}
-        self.ChoosingTrackMode=True
-        self.ChoosingFXMode=False
+        self.ChoosingTrackMode=False
+        self.ChoosingFXMode=True
         self.ChoosingKeyMode=False
-        self.ChosenTrack=None
+        self.ChosenTrack=[]
+        self.ChosenFX=None
         self.NewTrack=None
         self.track=TrackFX.TrackFX()
 
@@ -27,10 +27,8 @@ class RecordMode:
     
     def setRecording(self,Recording):
         self.__Recording=Recording
-        return None
 
     def __NoneAllMode(self):
-        #self.__NoneMode=False
         self.__PlayMode=False
         self.__RecordMode=False
         self.__LoopMode=False
@@ -51,14 +49,6 @@ class RecordMode:
 
     def getPlayMode(self):
         return self.__PlayMode
-    
-    #def setNoneMode(self):
-    #    print("None Mode ON\n")
-    #    self.__NoneAllMode()
-    #    self.__NoneMode=True
-
-   # def getNoneMode(self):
-   #     return self.__NoneMode
     
     def setLoopMode(self):
         print("Loop Mode On\n")
@@ -97,17 +87,23 @@ class RecordMode:
             if self.getFXMode():
                 self.setPlayMode()
             else:
-                self.getFXMode()
+                self.setFXMode()
+                self.ShowFX()
+                print("Choose Your FXes")
             return True
         else:
             return False
     
     def ShowFX(self):
         self.track.ShowList()
+
     
     def ChooseFX(self,keydata): #选择效果
-        self.track.Choose(keydata,self.ChosenTrack,self.NewTrack)
-        
+        #self.track.ChooseFX(keydata,self.ChosenTrack,self.NewTrack)
+        return self.track.ChooseFX(keydata)
     
+    def giveFXtoTrack(self,ChosenTrack,NewTrack):
+        self.ChosenFX.FX(ChosenTrack,NewTrack)
+        
 if __name__=="__main__":
     print("This is RecordControl module")
