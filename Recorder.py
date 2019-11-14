@@ -50,11 +50,11 @@ class Recorder():
             if FrameLength*self.CHUNK/(self.RATE/self.CHANNELS)>= ChosenTrackTime :
                 FrameLength=0
                 CycleLength+=1
+                print(str(CycleLength)+" times\n")
         stream.stop_stream()
         stream.close
         p.terminate()
         self.save(self.__FRAMES)    #在结束之后保存
-        print(str(CycleLength)+" times\n")
         print("Sync Complete\n")
 
     def stop(self):
