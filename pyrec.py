@@ -39,9 +39,29 @@ def writetofile(key):
                 return 
         else :
             if keydata in Mode.KeyToTrack:
+                print(Mode.KeyToTrack[keydata].getLength())
                 Mode.KeyToTrack[keydata].play()
+    elif Mode.getSyncMode():
+        if Mode.ChoosingSyncMode:
+            Mode.ChosenTrackTime=Mode.KeyToTrack[keydata].getLength()
+            Mode.ChoosingSyncMode=False
+            print("Choose A Track To Record\n")
+        else:
+            if not Mode.getRecording():
+                    Mode.setRecording(True)
+                    a=recorder.Recorder(keydata)
+                    Mode.setKeySet(keydata,a) #没有开始录音
+                    a.startSync(Mode.ChosenTrackTime)   #录音开始
+                    print("Recording Start\n")
+            elif Mode.getRecording() :
+                print("recording stopped\n")
+                Mode.setRecording(False)
+                Mode.KeyToTrack[keydata].stop()
+                Mode.ChoosingSyncMode=True
+                Mode.setPlayMode()  #退出录音模式
+        
+            
     elif Mode.getFXMode():
-        print("a")
         if Mode.ChoosingFXMode:
             Mode.ChosenFX=Mode.ChooseFX(keydata)    #选择完效果
             Mode.ChoosingFXMode=False   #选择完效果

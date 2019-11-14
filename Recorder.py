@@ -29,16 +29,40 @@ class Recorder():
             self.__FRAMES.append(data)
         stream.stop_stream()
         stream.close
-        p.terminate
+        p.terminate()
         self.save(self.__FRAMES)    #在结束之后保存
     
+    def startSync(self,ChosenTrackTime):
+        print("Syncing\n")
+        threading._start_new_thread(self.__Syncing,(),{"ChosenTrackTime":ChosenTrackTime})
         
+    def __Syncing(self,ChosenTrackTime):
+        self.__running=True
+        self.__FRAMES=[]
+        FrameLength=0
+        CycleLength=0
+        p=pyaudio.PyAudio()
+        stream=p.open(format=self.FORMAT,channels=self.CHANNELS,rate=self.RATE,input=True,frames_per_buffer=self.CHUNK)
+        while self.__running or FrameLength!=0:
+            data=stream.read(self.CHUNK)
+            self.__FRAMES.append(data)
+            FrameLength+=1
+            if FrameLength*self.CHUNK/(self.RATE/self.CHANNELS)>= ChosenTrackTime :
+                FrameLength=0
+                CycleLength+=1
+        stream.stop_stream()
+        stream.close
+        p.terminate()
+        self.save(self.__FRAMES)    #在结束之后保存
+        print(str(CycleLength)+" times\n")
+        print("Sync Complete\n")
 
     def stop(self):
         print("stop")
         self.__running=False
     
     def save(self,Frame):
+        self.__FRAMES=Frame
         p =pyaudio.PyAudio()
         if not self.__name.endswith(".wav"):
             self.__name+=".wav"
@@ -99,6 +123,8 @@ class Recorder():
 
     def getName(self):
         return self.__name
+    def getLength(self):
+        return len(self.__FRAMES)*self.CHUNK/(self.RATE/self.CHANNELS)
         
 
 
