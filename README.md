@@ -5,9 +5,11 @@ This terminal application has 4 modes:
 * ***Record Mode***\
 Press 'R' to enter ***Record Mode***\
 After recording a Track, the app automatically switch to ***Play Mode***
+* ***Sync Mode***\
+Sync Mode is the alternative way of recording a track that has the same of any times of length of the track that you choose
 * ***Play Mode***\
 This App Starts in Play Mode
-Press 'W' to enter ***Play Mode***
+Press 'Q' to enter ***Play Mode***
 * ***Loop Mode***\
 Press 'Q' to enter ***Loop Mode*** \
 While you are in ***Play Mode***
