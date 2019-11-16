@@ -1,10 +1,5 @@
 from pynput.keyboard import Listener
 import sounddevice as sd
-import matplotlib.pyplot as plt
-import time
-import threading
-import pyaudio 
-import wave
 
 import RecordControl as rc  #记录按键，控制状态
 import Recorder as recorder #录音器
@@ -87,10 +82,8 @@ def writetofile(key):
 
 
 if __name__=="__main__":
-    plt.close('')
     print (sd.query_devices())
     with Listener(on_press=writetofile) as Listener:
-        print('a')
         Mode=rc.RecordMode()
         Listener.join()
     print("End")
